@@ -1,8 +1,8 @@
 /**
  * 🚂 Mumbai Local Train Pass Generator
  *
- * Aaj se tu Mumbai local ka digital pass system bana raha hai! Passenger
- * ka data milega aur tujhe ek formatted pass string generate karni hai.
+ * Aaj se tum Mumbai local ka digital pass system bana rahe ho! Passenger
+ * ka data milega aur tumhe ek formatted pass string generate karni hai.
  * Pass mein sab details honi chahiye ek specific format mein.
  *
  * Rules:
@@ -43,4 +43,53 @@
  */
 export function generateLocalPass(passenger) {
   // Your code here
+
+
+  
+    if (!passenger || typeof passenger !== "object") {
+      return "INVALID PASS";
+    }
+  
+    const { name, from, to, classType } = passenger;
+  
+   
+    if (!name || !from || !to || !classType) {
+      return "INVALID PASS";
+    }
+  
+    if (
+      typeof name !== "string" ||
+      typeof from !== "string" ||
+      typeof to !== "string" ||
+      typeof classType !== "string"
+    ) {
+      return "INVALID PASS";
+    }
+  
+    const cls = classType.toLowerCase();
+  
+    if (cls !== "first" && cls !== "second") {
+      return "INVALID PASS";
+    }
+  
+
+    const titleCase = (str) =>
+      str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  
+
+    const passId =
+      cls.charAt(0).toUpperCase() +
+      from.slice(0, 3).toUpperCase() +
+      to.slice(0, 3).toUpperCase();
+  
+      return (`MUMBAI LOCAL PASS
+---
+Name: ${name.toUpperCase()}
+From: ${titleCase(from)}
+To: ${titleCase(to)}
+Class: ${cls.toUpperCase()}
+Pass ID: ${passId}`).trim();
+
+
+
 }
